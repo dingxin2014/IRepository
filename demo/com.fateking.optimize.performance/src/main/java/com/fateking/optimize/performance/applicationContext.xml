@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+     http://www.springframework.org/schema/context 
+     http://www.springframework.org/schema/context/spring-context-4.0.xsd
+   	 http://www.springframework.org/schema/aop 
+ 	 http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+
+	<context:component-scan base-package="com.fateking.optimize.performance.*"></context:component-scan>
+
+	<bean id="performanceMonitorInterceptor" class="com.fateking.optimize.performance.FatekingPerformanceMonitorInterceptor" />
+
+	<!-- <logger name="org.springframework.aop.interceptor.PerformanceMonitorInterceptor" 
+		additivity="false"> <level value="TRACE"/> <appender-ref ref="STDOUT"/> </logger> -->
+		
+	<bean
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames">
+			<list>
+				<value>*Service</value>
+			</list>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>performanceMonitorInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	
+	<aop:config>
+		<aop:pointcut id="allMethods"
+			expression="execution(* com.fateking.optimize.performance.*.*(..))" />
+		<aop:advisor pointcut-ref="allMethods" advice-ref="performanceMonitor"
+			order="2" />
+	</aop:config>
+
+
+ 	<bean id="sinaStock" class="com.fateking.optimize.performance.SinaStock" scope="singleton" autowire="byType"/> 
+</beans>
