@@ -27,14 +27,14 @@
 				expression="execution(* com.fateking.optimize.performance.*.*(..))" />
 			 
 			<!-- 前置通知 -->
-	<!--		<aop:before pointcut-ref="performanceMonitorInterceptorPointCut" method="before" /> -->
+			<aop:before pointcut-ref="performanceMonitorInterceptorPointCut" method="before" /> 
 
 			<!-- 后置通知 -->
-	<!--		<aop:after-returning pointcut-ref="performanceMonitorInterceptorPointCut"
-				method="afterReturning" /> -->
-	<!--		<aop:after-throwing pointcut-ref="performanceMonitorInterceptorPointCut"
-				method="afterThrowing" /> -->
-	<!--		<aop:after pointcut-ref="performanceMonitorInterceptorPointCut" method="after" /> -->
+			<aop:after-returning pointcut-ref="performanceMonitorInterceptorPointCut"
+				method="afterReturning" /> 
+			<aop:after-throwing pointcut-ref="performanceMonitorInterceptorPointCut"
+				method="afterThrowing" /> 
+			<aop:after pointcut-ref="performanceMonitorInterceptorPointCut" method="after" /> 
 
 			<!-- 环绕通知 -->
 			<aop:around method="around"

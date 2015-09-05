@@ -2,6 +2,8 @@ package com.fateking.optimize.performance.bean;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 
 /**
  * <p>AOP方法性能统计实体  </p>
@@ -13,6 +15,7 @@ public class StackEntry {
      public long beginTime;    
      public long endTime;    
      
+     public String id = UUID.randomUUID().toString();
      /**  
       * 节点所处高度  
       */    

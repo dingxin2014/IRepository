@@ -20,7 +20,7 @@ public class StackData {
      */    
     public int level;    
     
-    public boolean isRoot(){
-    	return root.equals(currentEntry);
+    public boolean isReturn(){
+    	return currentEntry == null ;
     }
 }

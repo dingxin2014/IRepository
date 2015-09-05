@@ -36,7 +36,7 @@ public class FatekingPerformanceMonitorInterceptor implements com.fateking.optim
         if (data == null) {      
             data = new StackData();      
             data.root = currentEntry;      
-            data.level = 1;    
+            data.level = 1;   
             dataHolder.set(data);      
         } else{
         	StackEntry parent = data.currentEntry;      
@@ -47,23 +47,26 @@ public class FatekingPerformanceMonitorInterceptor implements com.fateking.optim
         currentEntry.level=data.level;    
         data.level++;
 		
-		
+        System.out.println("Before > currentEntry level is " +data.currentEntry.level+ "  Run ID:"+data.currentEntry.id);
+        
         Object retVal = pjp.proceed(pjp.getArgs());  
         
+        System.out.println("After > currentEntry level is " +data.currentEntry.level+ "  Run ID:"+data.currentEntry.id);
         //after      
         StackEntry self = data.currentEntry;    
         self.endTime = System.currentTimeMillis();    
         data.currentEntry = self.parent;    
         data.level--;  
-        if(data.isRoot()){
-        	System.out.println("== Start Printing ==");
-        	printStack(data); 
-        }
         
+
+		if(dataHolder.get().isReturn()){
+			printStack(data);
+		}
+		
         return retVal;   
 	}
 	
-    private static void printStack(StackData data) {    
+    private void printStack(StackData data) {    
         if(logger.isInfoEnabled()){    
             StringBuilder sb = new StringBuilder("\r\n");    
             StackEntry root = data.root;    
@@ -72,9 +75,10 @@ public class FatekingPerformanceMonitorInterceptor implements com.fateking.optim
         }    
     }    
     
-    private static void appendNode(StackEntry entry, StringBuilder sb) {    
+    private void appendNode(StackEntry entry, StringBuilder sb) {    
         long totalTime = entry.endTime-entry.beginTime ;    
-        if(entry.level ==1){    
+        if(entry.level ==1){   
+        	sb.append(dataHolder.getThreadId()+"\n");
             sb.append("|-");    
         }    
         sb.append(totalTime);    

@@ -9,10 +9,31 @@ public class App
 	
     public static void main( String[] args )
     {
-		Logger logger = Logger.getLogger("");
+		//Logger logger = Logger.getLogger("");
 		
 		PropertyConfigurator.configure(System.getProperty("user.dir") + "\\log4j.properties"); 
     	//logger.warn("123xxx");
+		
+		Thread t = new Thread(new Runnable(){
+
+			public void run() {
+		    	SleepService sleep = (SleepService)BeanHelper.getBean("sleep");
+		    	sleep.sleep();				
+			}
+			
+		});
+		t.start();
+		
+		Thread t2 = new Thread(new Runnable(){
+
+			public void run() {
+		    	SleepService sleep = (SleepService)BeanHelper.getBean("sleep");
+		    	sleep.sleep();				
+			}
+			
+		});
+		t2.start();
+		
     	SleepService sleep = (SleepService)BeanHelper.getBean("sleep");
     	sleep.sleep();
     	

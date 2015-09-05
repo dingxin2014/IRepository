@@ -6,14 +6,22 @@ import org.springframework.stereotype.Component;
 @Component
 @Scope("singleton")
 public class DataHolder {
+ 
 
-	private StackData stackData;
+	private static final ThreadLocal<StackData> threadLocal = new ThreadLocal<StackData>(); 
 	
 	public StackData get(){
-		return stackData;
+		return threadLocal.get();
 	}
 	
 	public void set(StackData stackData){
-		this.stackData = stackData;
+		threadLocal.set(stackData);
 	}
+
+	public String getThreadId() {
+		return Thread.currentThread().toString();
+	}
+
+	
+	
 }

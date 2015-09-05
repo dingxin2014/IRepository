@@ -7,21 +7,17 @@ import org.springframework.stereotype.Service;
 
 
 
-@Service("sleep2")
-public class SleepService2  {
+@Service("sleep3")
+public class SleepService3  {
 	private static Object o = new Object();
 	private List<User> list = new ArrayList<User>();
 
 	public void sleep() {
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
-    	SleepService3 sleep3 = (SleepService3)BeanHelper.getBean("sleep3");
-    	sleep3.sleep();
-    	
 	}
 
 	public void consumeMemery() {
