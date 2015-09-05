@@ -19,4 +19,8 @@ public class StackData {
      * 堆栈树高度  
      */    
     public int level;    
+    
+    public boolean isRoot(){
+    	return root.equals(currentEntry);
+    }
 }

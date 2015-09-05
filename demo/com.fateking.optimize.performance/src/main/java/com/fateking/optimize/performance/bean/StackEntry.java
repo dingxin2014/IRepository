@@ -28,9 +28,35 @@ public class StackEntry {
       */    
      public StackEntry parent ;    
      
+     public StackEntry(){}
+     
      public StackEntry(String path,long currentTimeMillis) {   
     	 this.path = path;
          this.beginTime = currentTimeMillis;    
          this.child = new ArrayList<StackEntry>();    
-     }    
+     }
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + level;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		StackEntry other = (StackEntry) obj;
+		if (level != other.level)
+			return false;
+		return true;
+	}    
+     
+     
 }

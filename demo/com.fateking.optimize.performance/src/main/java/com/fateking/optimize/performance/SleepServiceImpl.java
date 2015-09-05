@@ -12,15 +12,17 @@ public class SleepServiceImpl implements SleepService {
 	private static Object o = new Object();
 	private List<User> list = new ArrayList<User>();
 
-	public void sleep(int x) {
+	public void sleep() {
 		try {
-			Thread.sleep(2000+x);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		
     	SleepService2 sleep2 = (SleepService2)BeanHelper.getBean("sleep2");
-    	sleep2.sleep(1000);
+    	sleep2.sleep();
+    	
+    	sleep2.sleep();
 	}
 
 	public void consumeMemery() {

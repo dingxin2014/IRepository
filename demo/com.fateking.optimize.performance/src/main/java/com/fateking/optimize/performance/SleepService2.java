@@ -12,9 +12,9 @@ public class SleepService2  {
 	private static Object o = new Object();
 	private List<User> list = new ArrayList<User>();
 
-	public void sleep(int x) {
+	public void sleep() {
 		try {
-			Thread.sleep(2000+x);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

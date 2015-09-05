@@ -10,10 +10,11 @@ public class App
     public static void main( String[] args )
     {
 		Logger logger = Logger.getLogger("");
+		
 		PropertyConfigurator.configure(System.getProperty("user.dir") + "\\log4j.properties"); 
     	//logger.warn("123xxx");
     	SleepService sleep = (SleepService)BeanHelper.getBean("sleep");
-    	sleep.sleep(1200);
+    	sleep.sleep();
     	
 //    	SleepService2 sleep2 = (SleepService2)BeanHelper.getBean("sleep2");
 //    	sleep2.sleep(1200);

@@ -33,7 +33,7 @@ public class FatekingPerformanceMonitorInterceptor implements com.fateking.optim
 		//before
 		StackData data = dataHolder.get();   
         StackEntry currentEntry = new StackEntry(pjp.getSignature().toString(),System.currentTimeMillis());      
-        if (dataHolder.get() == null) {      
+        if (data == null) {      
             data = new StackData();      
             data.root = currentEntry;      
             data.level = 1;    
@@ -54,39 +54,15 @@ public class FatekingPerformanceMonitorInterceptor implements com.fateking.optim
         StackEntry self = data.currentEntry;    
         self.endTime = System.currentTimeMillis();    
         data.currentEntry = self.parent;    
-        data.level--;    
-        printStack(data);   
+        data.level--;  
+        if(data.isRoot()){
+        	System.out.println("== Start Printing ==");
+        	printStack(data); 
+        }
         
         return retVal;   
 	}
 	
-	private void aroundStart(String path){
-		StackData data = dataHolder.get();   
-        StackEntry currentEntry = new StackEntry(path,System.currentTimeMillis());      
-        if (dataHolder.get() == null) {      
-            data = new StackData();      
-            data.root = currentEntry;      
-            data.level = 1;    
-            dataHolder.set(data);      
-        } else{
-        	StackEntry parent = data.currentEntry;      
-            currentEntry.parent=parent;      
-            parent.child.add(currentEntry);      
-        }
-        data.currentEntry = currentEntry;      
-        currentEntry.level=data.level;    
-        data.level++;     
-	}
-	
-	private void aroundEnd(String path){
-		 	StackData data = dataHolder.get();      
-	        StackEntry self = data.currentEntry;    
-	        self.endTime = System.currentTimeMillis();    
-	        data.currentEntry = self.parent;    
-	        data.level--;    
-	        printStack(data);    
-	}
-
     private static void printStack(StackData data) {    
         if(logger.isInfoEnabled()){    
             StringBuilder sb = new StringBuilder("\r\n");    
