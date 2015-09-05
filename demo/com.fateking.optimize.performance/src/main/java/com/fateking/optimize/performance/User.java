@@ -3,7 +3,7 @@ package com.fateking.optimize.performance;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-@Component  
+@Component("user")
 @Scope("prototype") 
 public class User {
 
@@ -33,6 +33,12 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + "]";
+	}
+	
 	
 	
 }

@@ -8,9 +8,10 @@ public class BeanHelper {
 	private BeanHelper() {
 	}
 
-	private static ApplicationContext ac = new ClassPathXmlApplicationContext("classpath*:applicationContext.xml");
+	private static ApplicationContext ac = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
 
 	public static Object getBean(String beanName) {
+
 		return ac.getBean(beanName);
 	}
 

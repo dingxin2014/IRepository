@@ -1,5 +1,5 @@
 package com.fateking.optimize.performance;
 
 public interface SleepService {
-	public void sleep();
+	public void sleep(int x);
 }

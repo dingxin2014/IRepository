@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 
 
-@Service("sleep")
-public class SleepServiceImpl implements SleepService {
+@Service("sleep2")
+public class SleepService2  {
 	private static Object o = new Object();
 	private List<User> list = new ArrayList<User>();
 
@@ -18,9 +18,6 @@ public class SleepServiceImpl implements SleepService {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
-    	SleepService2 sleep2 = (SleepService2)BeanHelper.getBean("sleep2");
-    	sleep2.sleep(1000);
 	}
 
 	public void consumeMemery() {

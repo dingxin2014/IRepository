@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:ob="http://www.fateking.com:8083/fateking-schema/fateking-observer.jsp"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+     http://www.springframework.org/schema/context 
+     http://www.springframework.org/schema/context/spring-context-4.0.xsd
+   	 http://www.springframework.org/schema/aop 
+ 	 http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+ 	 http://www.fateking.com:8083/fateking-schema/fateking-observer.jsp
+ 	 http://www.fateking.com:8083/fateking-schema/fateking-observer.xsd">
+
+	<context:annotation-config />
+
+	<context:component-scan base-package="com.fateking.optimize.performance"></context:component-scan>
+
+	<bean id="performanceMonitorInterceptor"
+		class="com.fateking.optimize.performance.interceptor.FatekingPerformanceMonitorInterceptor" />
+
+
+	<aop:config proxy-target-class="true">       <!-- true基于类的代理   false 基于接口的代理 --> 
+		<aop:aspect ref="performanceMonitorInterceptor">
+			<!-- 定义切入点 -->
+			<aop:pointcut id="performanceMonitorInterceptorPointCut"
+				expression="execution(* com.fateking.optimize.performance.*.*(..))" />
+			 
+			<!-- 前置通知 -->
+	<!--		<aop:before pointcut-ref="performanceMonitorInterceptorPointCut" method="before" /> -->
+
+			<!-- 后置通知 -->
+	<!--		<aop:after-returning pointcut-ref="performanceMonitorInterceptorPointCut"
+				method="afterReturning" /> -->
+	<!--		<aop:after-throwing pointcut-ref="performanceMonitorInterceptorPointCut"
+				method="afterThrowing" /> -->
+	<!--		<aop:after pointcut-ref="performanceMonitorInterceptorPointCut" method="after" /> -->
+
+			<!-- 环绕通知 -->
+			<aop:around method="around"
+				pointcut="execution(* com.fateking.optimize.performance.*.*(..))" />
+		</aop:aspect>
+	</aop:config>
+
+
+
+	<!-- <ob:performance> <ob:active>true</ob:active> <ob:output>D:ob</ob:output> 
+		</ob:performance> -->
+
+</beans>
